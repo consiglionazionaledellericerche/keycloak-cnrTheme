@@ -478,6 +478,9 @@ ul#kc-totp-supported-apps {
         left: 0;
         height:1.3em;
     }
+    #kc-locale-dropdown a {
+        text-align: left;
+    }
 }
 
 @media (max-width: 767px) {
