@@ -27,10 +27,11 @@
     <description/>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>keycloak-example-themes</artifactId>
+    <artifactId>keycloak-cnrTheme</artifactId>
+
     <packaging>jar</packaging>
 
     <build>
-        <finalName>keycloak-example-themes</finalName>
+        <finalName>keycloak-cnrTheme</finalName>
     </build>
 </project>
