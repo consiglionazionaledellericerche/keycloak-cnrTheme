@@ -160,6 +160,7 @@ h1#kc-page-title::before {
     background-size: contain;
     height: 70px;
     width: 250px;
+    max-width: 100%;
     margin: auto;
 }
 
@@ -469,9 +470,10 @@ ul#kc-totp-supported-apps {
     }
 
     #kc-locale {
-        position: relative;
-        text-align: right;
-        z-index: 9999;
+        position: absolute;
+        bottom: -2.3em;
+        left: 0;
+        height:1.3em;
     }
 }
 
@@ -630,22 +632,26 @@ ul#kc-totp-supported-apps {
 
 .card-pf {
     margin: 0 auto;
-    box-shadow: var(--pf-global--BoxShadow--lg);
     padding: 0 20px;
     max-width: 500px;
-    border-top: 4px solid;
-    border-color: #0066CC; /* default - IE compatibility */
-    border-color: var(--pf-global--primary-color--100);
+    box-shadow: none;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: relative;
 }
 
 /*phone*/
 @media (max-width: 767px) {
+    h1#kc-page-title {
+        margin-top: 30px;
+    }
+
     .login-pf-page .card-pf {
         max-width: none;
         margin-left: 0;
         margin-right: 0;
         padding-top: 0;
-        border-top: 0;
+        border: none;
         box-shadow: 0 0;
     }
 
