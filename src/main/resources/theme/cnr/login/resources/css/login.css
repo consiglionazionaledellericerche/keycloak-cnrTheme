@@ -691,6 +691,21 @@ ul#kc-totp-supported-apps {
     margin-bottom: 0px;
 }
 
+#kc-social-providers hr {
+    margin-top: 3em;
+    margin-bottom: -0.8em;
+    border-color: #ccc ;
+}
+
+#kc-social-providers h4 {
+    height: 1.2em;
+    line-height: 1.2em;
+    margin-top: 0;
+    display: inline-block;
+    background-color: white;
+    padding: 0 0.5em;
+}
+
 .no-bottom-margin {
     margin-bottom: 0;
 }
