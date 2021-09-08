@@ -159,8 +159,16 @@ h1#kc-page-title::before {
     background: top center url('https://www.cnr.it/sites/all/themes/custom/cnr03_theme/img/cnrlogo.svg') no-repeat;
     background-size: contain;
     height: 70px;
-    width: 300px;
+    width: 250px;
     margin: auto;
+}
+
+#kc-locale-dropdown a {
+    text-decoration: none;
+}
+
+a#kc-current-locale-link::after {
+    content: "\25bc";
 }
 
 #kc-locale ul {
