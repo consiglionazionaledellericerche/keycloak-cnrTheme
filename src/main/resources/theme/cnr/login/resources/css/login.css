@@ -196,7 +196,7 @@ a#kc-current-locale-link::after {
 
 /* IE compatibility */
 a#kc-current-locale-link::after {
-    content: "\2c5";
+    content: "\25bc";
     margin-left: 4px;
     margin-left: var(--pf-global--spacer--xs)
 }
