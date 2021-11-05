@@ -70,19 +70,47 @@
                 <hr/>
                 <h4>${msg("identity-provider-login-label")}</h4>
 
-                <ul class="${properties.kcFormSocialAccountListClass!} <#if social.providers?size gt 3>${properties.kcFormSocialAccountListGridClass!}</#if>">
+                <ul class="${properties.kcFormSocialAccountListClass!} ${properties.kcFormSocialAccountListGridClass!}">
+                    <#assign spidFlag = 0>
                     <#list social.providers as p>
-                        <a id="social-${p.alias}" class="${properties.kcFormSocialAccountListButtonClass!} <#if social.providers?size gt 3>${properties.kcFormSocialAccountGridItem!}</#if>"
-                                type="button" href="${p.loginUrl}">
-                            <#if p.iconClasses?has_content>
-                                <i class="${properties.kcCommonLogoIdP!} ${p.iconClasses!}" aria-hidden="true"></i>
-                                <span class="${properties.kcFormSocialAccountNameClass!} kc-social-icon-text">${p.displayName!}</span>
-                            <#else>
-                                <span class="${properties.kcFormSocialAccountNameClass!}">${p.displayName!}</span>
-                            </#if>
+                        <#if p.alias != "saml"><#assign spidFlag = 1></#if>
+                        <#if p.alias == "saml">
+                        <a class="italia-it-button italia-it-button-size-m button-spid" href="${p.loginUrl}" style="background: #eeeeee;display: flex;align-items: center;justify-content: center;">
+                            <span class="spid-sr-only">${p.displayName!}</span>
+                            <img src="${url.resourcesPath}/img/idem.svg" onerror="this.src='${url.resourcesPath}/img/idem.png'; this.onerror=null;" alt="${p.displayName!}" style="height:40px; width: auto" />
                         </a>
+                        </#if>
                     </#list>
+                    <#if spidFlag == 1>
+                    <a href="#" class="italia-it-button italia-it-button-size-m button-spid" spid-idp-button="#spid-idp-button-medium-get" aria-haspopup="true" aria-expanded="false">
+                        <span class="italia-it-button-icon"><img src="${url.resourcesPath}/img/spid-ico-circle-bb.svg" onerror="this.src='${url.resourcesPath}/img/spid-ico-circle-bb.png'; this.onerror=null;" alt="" /></span>
+                        <span class="italia-it-button-text">Entra con SPID</span>
+                    </a>
+                    </#if>
                 </ul>
+                <div id="spid-idp-button-medium-get" class="spid-idp-button spid-idp-button-tip spid-idp-button-relative">
+                    <ul id="spid-idp-list-medium-root-get" class="spid-idp-button-menu" aria-labelledby="spid-idp">
+                        <#list social.providers as p>
+                            <#if p.alias != "saml">
+                            <li class="spid-idp-button-link">
+                                <a href="${p.loginUrl}">
+                                    <span class="spid-sr-only">${p.displayName!}</span>
+                                    <img src="${url.resourcesPath}/img/spid-idp-${p.alias!}.svg" onerror="this.src='${url.resourcesPath}/img/spid-idp-${p.alias!}.png'; this.onerror=null;" alt="${p.displayName!}"/>
+                                </a>
+                            </li>
+                            </#if>
+                        </#list>
+                        <li class="spid-idp-support-link" data-spidlink="info">
+                            <a href="https://www.spid.gov.it">Maggiori informazioni</a>
+                        </li>
+                        <li class="spid-idp-support-link" data-spidlink="rich">
+                            <a href="https://www.spid.gov.it/richiedi-spid">Non hai SPID?</a>
+                        </li>
+                        <li class="spid-idp-support-link" data-spidlink="help">
+                            <a href="https://www.spid.gov.it/serve-aiuto">Serve aiuto?</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </#if>
 
