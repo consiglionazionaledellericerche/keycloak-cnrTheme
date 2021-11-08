@@ -159,12 +159,13 @@ h1#kc-page-title {
 h1#kc-page-title::before {
     content: '';
     display: block;
-    background: top center url('https://www.cnr.it/sites/all/themes/custom/cnr03_theme/img/cnrlogo.svg') no-repeat;
+    background: top center url('../cnrlogo.svg') no-repeat;
+    /* background: top center url('https://www.cnr.it/sites/all/themes/custom/cnr03_theme/img/cnrlogo.svg') no-repeat; */
     background-size: contain;
-    height: 70px;
-    width: 250px;
+    height: 41px;
+    width: 350px;
     max-width: 100%;
-    margin: auto;
+    margin: auto auto 40px auto ;
 }
 
 #kc-locale-dropdown a {
@@ -789,4 +790,18 @@ ul#kc-totp-supported-apps {
 
 #kc-form-login input, .button-spid, .idem-button {
     border-radius: 4px;
+}
+
+#spid-idp-button-medium-get, .idem-button {
+    height: 48px;
+}
+
+@media (min-width: 768px) {
+    .login-pf-page .card-pf {
+        padding: 40px;
+    }
+}
+
+h1#kc-page-title {
+    margin-top: 0px;
 }
