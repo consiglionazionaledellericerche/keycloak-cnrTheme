@@ -159,8 +159,7 @@ h1#kc-page-title {
 h1#kc-page-title::before {
     content: '';
     display: block;
-    background: top center url('../cnrlogo.svg') no-repeat;
-    /* background: top center url('https://www.cnr.it/sites/all/themes/custom/cnr03_theme/img/cnrlogo.svg') no-repeat; */
+    background: top center url('../img/cnrlogo.svg') no-repeat;
     background-size: contain;
     height: 41px;
     width: 350px;
