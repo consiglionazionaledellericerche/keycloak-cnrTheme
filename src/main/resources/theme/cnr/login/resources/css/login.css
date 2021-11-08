@@ -750,3 +750,8 @@ ul#kc-totp-supported-apps {
 #kc-social-providers .kc-social-links {
     margin-bottom: 0;
 }
+
+.button-spid:focus {
+    background-color: #036;
+    color: #FFF
+}
