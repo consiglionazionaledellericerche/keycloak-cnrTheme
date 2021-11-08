@@ -208,10 +208,6 @@ a#kc-current-locale-link::after {
     padding-top: 40px;
 }
 
-.login-pf a:hover {
-    color: #0099d3;
-}
-
 #kc-logo {
     width: 100%;
 }
@@ -726,7 +722,31 @@ ul#kc-totp-supported-apps {
     margin-top: 5px;
 }
 
+.idem-button {
+    background: #eeeeee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.idem-button:hover,
+.idem-button:focus,
+.idem-button:active {
+    background: #cccccc;
+}
+
 /* reset per spid */
+#kc-social-providers *,
 #spid-idp-list-medium-root-get * {
     box-sizing: content-box
+}
+#kc-social-providers .italia-it-button-size-m {
+    width: auto;
+}
+
+#kc-social-providers .italia-it-button-icon {
+    height: 31px;
+}
+
+#kc-social-providers .kc-social-links {
+    margin-bottom: 0;
 }

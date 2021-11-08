@@ -64,18 +64,20 @@
         </div>
 
         <#if realm.password && social.providers??>
-
-
+            <#assign spidFlag = 0>
+            <#assign idemFlag = 0>
+            <#list social.providers as p>
+                <#if p.alias == "Infocert" || p.alias == "Intesa" || p.alias == "Lepida" || p.alias == "Namirial" || p.alias == "Poste" || p.alias == "Sielte" || p.alias == "SpidItalia" || p.alias == "Tim"><#assign spidFlag = 1></#if>
+                <#if p.alias == "saml"><#assign idemFlag = 1></#if>
+            </#list>
             <div id="kc-social-providers" class="${properties.kcFormSocialAccountSectionClass!}">
                 <hr/>
                 <h4>${msg("identity-provider-login-label")}</h4>
 
-                <ul class="${properties.kcFormSocialAccountListClass!} ${properties.kcFormSocialAccountListGridClass!}">
-                    <#assign spidFlag = 0>
+                <ul class="${properties.kcFormSocialAccountListClass!} <#if idemFlag == 1 && spidFlag == 1>${properties.kcFormSocialAccountListGridClass!}</#if>">
                     <#list social.providers as p>
-                        <#if p.alias != "saml"><#assign spidFlag = 1></#if>
                         <#if p.alias == "saml">
-                        <a class="italia-it-button italia-it-button-size-m button-spid" href="${p.loginUrl}" style="background: #eeeeee;display: flex;align-items: center;justify-content: center;">
+                        <a class="idem-button" href="${p.loginUrl}">
                             <span class="spid-sr-only">${p.displayName!}</span>
                             <img src="${url.resourcesPath}/img/idem.svg" onerror="this.src='${url.resourcesPath}/img/idem.png'; this.onerror=null;" alt="${p.displayName!}" style="height:40px; width: auto" />
                         </a>
