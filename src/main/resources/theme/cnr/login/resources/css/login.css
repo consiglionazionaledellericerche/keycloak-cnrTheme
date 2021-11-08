@@ -751,7 +751,42 @@ ul#kc-totp-supported-apps {
     margin-bottom: 0;
 }
 
+.pf-c-form-control, .button-spid, .idem-button {
+    border-radius: 4px;
+}
+
 .button-spid:focus {
     background-color: #036;
     color: #FFF
+}
+
+[type=submit] {
+    padding: 16px;
+    font-size: 16px;
+    line-height: 16px;
+    font-family: inherit;
+}
+
+#kc-form-login [type=text], #kc-form-login [type=password] {
+    border-width: 1px;
+    border-color: #ccc;
+    font-family: inherit;
+}
+
+#kc-form-login [type=text]:hover, #kc-form-login [type=password]:hover,
+#kc-form-login [type=text]:focus, #kc-form-login [type=password]:focus,
+#kc-form-login [type=text]:active, #kc-form-login [type=password]:active {
+    outline-color: #999;
+    outline-style: auto;
+    outline-width: 1px;
+}
+
+
+#kc-form-login label {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+#kc-form-login input, .button-spid, .idem-button {
+    border-radius: 4px;
 }
