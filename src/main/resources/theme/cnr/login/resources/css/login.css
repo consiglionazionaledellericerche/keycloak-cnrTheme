@@ -524,7 +524,7 @@ ul#kc-totp-supported-apps {
     #kc-locale {
         position: absolute;
         width: 200px;
-        top: 20px;
+        top: -20px;
         right: 20px;
         text-align: right;
         z-index: 9999;
