@@ -192,7 +192,7 @@ a#kc-current-locale-link::after {
 #kc-locale-dropdown a {
     color: #6A6E73;
     color: var(--pf-global--Color--200);
-    text-align: right;
+    text-align: left;
     font-size: 14px;
     font-size: var(--pf-global--FontSize--sm);
 }
