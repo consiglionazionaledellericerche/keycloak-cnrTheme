@@ -91,7 +91,7 @@
                     </#if>
                     <#list social.providers as p>
                         <#if p.providerId == "cieid">
-                            <a href="#" class="italia-it-button italia-it-button-size-m button-cie" spid-idp-button="#spid-idp-button-medium-get" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="italia-it-button italia-it-button-size-m button-spid button-cie" spid-idp-button="#spid-idp-button-medium-get" aria-haspopup="true" aria-expanded="false">
                                 <span class="italia-it-button-icon"><img src="${url.resourcesPath}/img/logo-cie-id.svg" onerror="this.src='${url.resourcesPath}/img/cie.png'; this.onerror=null;" alt="" /></span>
                                 <span class="italia-it-button-text">Entra con CIE</span>
                             </a>
