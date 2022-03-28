@@ -89,11 +89,19 @@
                         <span class="italia-it-button-text">Entra con SPID</span>
                     </a>
                     </#if>
+                    <#list social.providers as p>
+                        <#if p.provider == "cieid">
+                            <a class="cie-button" href="${p.loginUrl}">
+                                <span class="spid-sr-only">${p.displayName!}</span>
+                                <img src="${url.resourcesPath}/img/cie.png" onerror="this.src='${url.resourcesPath}/img/cie.png'; this.onerror=null;" alt="${p.displayName!}" style="height:40px; width: auto" />
+                            </a>
+                        </#if>
+                    </#list>
                 </ul>
                 <div id="spid-idp-button-medium-get" class="spid-idp-button spid-idp-button-tip spid-idp-button-relative">
                     <ul id="spid-idp-list-medium-root-get" class="spid-idp-button-menu" aria-labelledby="spid-idp">
                         <#list social.providers as p>
-                            <#if p.alias == "spid">
+                            <#if p.provider == "spid">
                             <li class="spid-idp-button-link">
                                 <a href="${p.loginUrl}">
                                     <span class="spid-sr-only">${p.displayName!}</span>
@@ -113,14 +121,6 @@
                         </li>
                     </ul>
                 </div>
-                <#list social.providers as p>
-                    <#if p.alias == "cieid">
-                        <a class="cie-button" href="${p.loginUrl}">
-                            <span class="spid-sr-only">${p.displayName!}</span>
-                            <img src="${url.resourcesPath}/img/cie.png" onerror="this.src='${url.resourcesPath}/img/cie.png'; this.onerror=null;" alt="${p.displayName!}" style="height:40px; width: auto" />
-                        </a>
-                    </#if>
-                </#list>
             </div>
         </#if>
 
