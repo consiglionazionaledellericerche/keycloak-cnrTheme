@@ -734,18 +734,6 @@ ul#kc-totp-supported-apps {
     background: #cccccc;
 }
 
-.cie-button {
-    background: #0062cc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.cie-button:hover,
-.cie-button:focus,
-.cie-button:active {
-    background: #0069d9;
-}
-
 /* reset per spid */
 #kc-social-providers *,
 #spid-idp-list-medium-root-get * {
@@ -763,11 +751,11 @@ ul#kc-totp-supported-apps {
     margin-bottom: 0;
 }
 
-.pf-c-form-control, .button-spid, .idem-button {
+.pf-c-form-control, .button-spid, .idem-button, .button-cie {
     border-radius: 4px;
 }
 
-.button-spid:focus {
+.button-spid:focus, .button-cie:focus {
     background-color: #036;
     color: #FFF
 }
@@ -799,7 +787,7 @@ ul#kc-totp-supported-apps {
     font-weight: 300;
 }
 
-#kc-form-login input, .button-spid, .idem-button {
+#kc-form-login input, .button-spid, .idem-button, .button-cie {
     border-radius: 4px;
 }
 
