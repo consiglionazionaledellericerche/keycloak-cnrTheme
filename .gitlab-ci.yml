@@ -1,0 +1,39 @@
+image: docker:stable
+
+variables:
+  DOCKER_DRIVER: overlay2
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --show-version"
+  CNR_MAVEN_VERSION: 3.4.0
+
+services:
+  - docker:dind
+
+stages:
+  - deploy_snapshot
+  - release
+
+deploy_nexus_snapshot:
+  stage: deploy_snapshot
+  image: docker.si.cnr.it/cnr-maven:$CNR_MAVEN_VERSION
+  only:
+    - dev
+  script:
+    - mvn deploy
+
+release_artifact:
+  stage: release
+  image: docker.si.cnr.it/cnr-maven:$CNR_MAVEN_VERSION
+  only:
+    - master
+  script:
+    - git checkout -B "$CI_BUILD_REF_NAME"
+    # mi metto in condizione del push per l'utente con la deploy key
+    - git remote set-url --push origin git@git.si.cnr.it:$CI_PROJECT_PATH
+    - mvn $MAVEN_CLI_OPTS -Dresume=false release:prepare release:perform -Pprod -DpushChanges=false -DlocalCheckout=true
+    - git push --tags
+    - git commit --amend -m "[ci skip] prepare for next development iteration"
+    - git push --set-upstream origin master
+  when: manual
+  allow_failure: false
+

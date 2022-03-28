@@ -734,6 +734,18 @@ ul#kc-totp-supported-apps {
     background: #cccccc;
 }
 
+.cie-button {
+    background: #0062cc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cie-button:hover,
+.cie-button:focus,
+.cie-button:active {
+    background: #0069d9;
+}
+
 /* reset per spid */
 #kc-social-providers *,
 #spid-idp-list-medium-root-get * {

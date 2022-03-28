@@ -17,21 +17,26 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>keycloak-examples-parent</artifactId>
-        <groupId>org.keycloak</groupId>
-        <version>15.0.2</version>
+        <artifactId>archetype</artifactId>
+        <groupId>it.cnr.si</groupId>
+        <version>1.1.0</version>
     </parent>
 
-    <name>Themes Examples</name>
+    <name>CNR theme keycloak login</name>
     <description/>
-    <modelVersion>4.0.0</modelVersion>
 
+    <groupId>it.cnr.si.keycloak</groupId>
     <artifactId>keycloak-cnrTheme</artifactId>
 
     <packaging>jar</packaging>
-
     <build>
         <finalName>keycloak-cnrTheme</finalName>
     </build>
+    <scm>
+        <connection>scm:git:ssh://git@git.si.cnr.it/keycloak/keycloak-cnrtheme.git</connection>
+        <developerConnection>scm:git:ssh://git@git.si.cnr.it/keycloak/keycloak-cnrtheme.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 </project>
