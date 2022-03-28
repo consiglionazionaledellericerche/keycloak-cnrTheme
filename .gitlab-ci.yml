@@ -1,39 +1,53 @@
-image: docker:stable
+image: docker:git
 
 variables:
   DOCKER_DRIVER: overlay2
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Djava.awt.headless=true"
-  MAVEN_CLI_OPTS: "--batch-mode --errors --show-version"
-  CNR_MAVEN_VERSION: 3.4.0
+  MAVEN_OPTS: "-Djava.awt.headless=true -Dsonar.host.url=$SONAR_HOST_URL"
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml -Dmaven.repo.local=./.m2/repository -Dnexus.url=$NEXUS_URL -Dnexus.login=$NEXUS_USERNAME -Dnexus.pwd=$NEXUS_PASSWORD -Djava.awt.headless=true --batch-mode --errors --fail-at-end --show-version"
 
 services:
   - docker:dind
 
 stages:
-  - deploy_snapshot
+  - deploy
   - release
 
-deploy_nexus_snapshot:
-  stage: deploy_snapshot
-  image: docker.si.cnr.it/cnr-maven:$CNR_MAVEN_VERSION
+maven-deploy:
+  stage: deploy
+  image: maven:alpine
+  script: "mvn clean deploy $MAVEN_CLI_OPTS "
+  artifacts:
+    paths:
+      - target/*.jar
   only:
-    - dev
-  script:
-    - mvn deploy
+    variables:
+      - $CI_COMMIT_MESSAGE !~ /prepare release/ && $CI_COMMIT_MESSAGE !~ /prepare for next development iteration/
+    refs:
+      - master
 
 release_artifact:
   stage: release
-  image: docker.si.cnr.it/cnr-maven:$CNR_MAVEN_VERSION
-  only:
-    - master
+  image: maven:alpine
   script:
-    - git checkout -B "$CI_BUILD_REF_NAME"
-    # mi metto in condizione del push per l'utente con la deploy key
-    - git remote set-url --push origin git@git.si.cnr.it:$CI_PROJECT_PATH
-    - mvn $MAVEN_CLI_OPTS -Dresume=false release:prepare release:perform -Pprod -DpushChanges=false -DlocalCheckout=true
-    - git push --tags
-    - git commit --amend -m "[ci skip] prepare for next development iteration"
-    - git push --set-upstream origin master
-  when: manual
-  allow_failure: false
+    - 'which git || (apk add --update git && rm -rf /var/cache/apk/*)'
+    -
+    # Add the SSH key stored in GIT_SSH_PRIV_KEY variable to the agent store
+    - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
 
+    # For Docker builds disable host key checking. Be aware that by adding that
+    # you are susceptible to man-in-the-middle attacks.
+    # WARNING: Use this only with the Docker executor, if you use it with shell
+    # you will overwrite your user's SSH config.
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - git config --global user.email "marco.spasiano@cnr.it"
+    - git config --global user.name "marco.spasiano"
+    - git checkout -B "$CI_BUILD_REF_NAME"
+    - mvn release:clean release:prepare -DreleaseVersion=$MAVEN_RELEASE_VERSION -Dresume=false -B $MAVEN_CLI_OPTS
+    - mvn release:perform -Dresume=false -B $MAVEN_CLI_OPTS
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE !~ /prepare release/ && $CI_COMMIT_MESSAGE !~ /prepare for next development iteration/
+    refs:
+      - master
+  when: manual
