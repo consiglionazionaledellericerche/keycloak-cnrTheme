@@ -1,10 +1,5 @@
 image: docker:git
 
-variables:
-  DOCKER_DRIVER: overlay2
-  MAVEN_OPTS: "-Djava.awt.headless=true -Dsonar.host.url=$SONAR_HOST_URL"
-  MAVEN_CLI_OPTS: "-s .m2/settings.xml -Dmaven.repo.local=./.m2/repository -Dnexus.url=$NEXUS_URL -Dnexus.login=$NEXUS_USERNAME -Dnexus.pwd=$NEXUS_PASSWORD -Djava.awt.headless=true --batch-mode --errors --fail-at-end --show-version"
-
 services:
   - docker:dind
 
@@ -12,10 +7,20 @@ stages:
   - deploy
   - release
 
+variables:
+  MAVEN_OPTS: "-Djava.awt.headless=true -Dsonar.host.url=$SONAR_HOST_URL"
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml -Dmaven.repo.local=./.m2/repository -Dnexus.url=$NEXUS_URL -Dnexus.login=$NEXUS_USERNAME -Dnexus.pwd=$NEXUS_PASSWORD -Djava.awt.headless=true --batch-mode --errors --fail-at-end --show-version"
+
+cache:
+  paths:
+    - ./.m2/repository
+  # keep cache across branch
+  key: "$CI_PROJECT_PATH"
+
 maven-deploy:
   stage: deploy
   image: maven:alpine
-  script: "mvn clean deploy $MAVEN_CLI_OPTS "
+  script: "mvn clean deploy $MAVEN_CLI_OPTS"
   artifacts:
     paths:
       - target/*.jar
