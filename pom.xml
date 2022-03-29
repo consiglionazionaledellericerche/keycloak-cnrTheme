@@ -24,7 +24,7 @@
     </parent>
 
     <name>CNR - Theme keycloak login</name>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
     <description />
 
     <groupId>it.cnr.si.keycloak</groupId>
