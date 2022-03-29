@@ -48,8 +48,8 @@ release_artifact:
     - git config --global user.email "marco.spasiano@cnr.it"
     - git config --global user.name "marco.spasiano"
     - git checkout -B "$CI_BUILD_REF_NAME"
-    - mvn release:clean release:prepare -DreleaseVersion=$MAVEN_RELEASE_VERSION -Dresume=false -B $MAVEN_CLI_OPTS
-    - mvn release:perform -Dresume=false -B $MAVEN_CLI_OPTS
+    - mvn $MAVEN_CLI_OPTS release:clean release:prepare -DreleaseVersion=$MAVEN_RELEASE_VERSION -Darguments="-DskipTests" -Dresume=false -B
+    - mvn $MAVEN_CLI_OPTS release:perform -Darguments="-DskipTests" -Dresume=false -B
   only:
     variables:
       - $CI_COMMIT_MESSAGE !~ /prepare release/ && $CI_COMMIT_MESSAGE !~ /prepare for next development iteration/
