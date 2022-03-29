@@ -32,17 +32,10 @@ maven-deploy:
 
 release_artifact:
   stage: release
-  image: maven:alpine
+  image: maven:3-jdk-8
   script:
-    - 'which git || (apk add --update git && rm -rf /var/cache/apk/*)'
-    - 'which ssh-agent || ( apk add --update openssh-client && rm -rf /var/cache/apk/*)'
-    # Add the SSH key stored in GIT_SSH_PRIV_KEY variable to the agent store
-    - eval $(ssh-agent -s)
+    - eval `ssh-agent -s`
     - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
-    # For Docker builds disable host key checking. Be aware that by adding that
-    # you are susceptible to man-in-the-middle attacks.
-    # WARNING: Use this only with the Docker executor, if you use it with shell
-    # you will overwrite your user's SSH config.
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - git config --global user.email "marco.spasiano@cnr.it"
