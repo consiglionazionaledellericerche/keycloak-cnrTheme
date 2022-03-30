@@ -1,4 +1,4 @@
-Example Themes
+CNR Themes
 ==============
 
 Deploy Themes
