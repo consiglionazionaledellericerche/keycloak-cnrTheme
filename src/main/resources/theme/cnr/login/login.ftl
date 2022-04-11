@@ -67,7 +67,7 @@
             <#assign spidFlag = 0>
             <#assign idemFlag = 0>
             <#list social.providers as p>
-                <#if p.alias == "Aruba" || p.alias == "Infocert" || p.alias == "Intesa" || p.alias == "Lepida" || p.alias == "Namirial" || p.alias == "Poste" || p.alias == "Sielte" || p.alias == "SpidItalia" || p.alias == "Tim"><#assign spidFlag = 1></#if>
+                <#if p.providerId == "spid"><#assign spidFlag = 1></#if>
                 <#if p.alias == "saml"><#assign idemFlag = 1></#if>
             </#list>
             <div id="kc-social-providers" class="${properties.kcFormSocialAccountSectionClass!}">
