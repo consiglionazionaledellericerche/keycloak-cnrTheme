@@ -24,7 +24,7 @@
     </parent>
 
     <name>CNR - Theme keycloak login</name>
-    <version>0.0.10</version>
+    <version>0.0.11-SNAPSHOT</version>
     <description />
 
     <groupId>it.cnr.si.keycloak</groupId>
@@ -37,6 +37,6 @@
     <scm>
         <connection>scm:git:ssh://git@git.si.cnr.it/keycloak/keycloak-cnrtheme.git</connection>
         <developerConnection>scm:git:ssh://git@git.si.cnr.it/keycloak/keycloak-cnrtheme.git</developerConnection>
-        <tag>0.0.10</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>
