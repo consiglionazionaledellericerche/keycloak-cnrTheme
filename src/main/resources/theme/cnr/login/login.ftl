@@ -25,12 +25,15 @@
                     </#if>
                 </div>
 
-                <div class="${properties.kcFormGroupClass!}">
+                <div class="${properties.kcFormGroupClass!} password-wrapper">
                     <label for="password" class="${properties.kcLabelClass!}">${msg("password")}</label>
 
                     <input tabindex="2" id="password" class="${properties.kcInputClass!}" name="password" type="password" autocomplete="off"
                            aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>"
                     />
+                    <button class="toggle-password" onclick="togglePasswordVisibility()" type="button" aria-checked="false" tabindex="3">
+                        <img id="eyeIcon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij4KICA8IS0tIE9jY2hpbyBlc3Rlcm5vIC0tPgogIDxwYXRoIGZpbGw9IiM0NDQiIGQ9Ik0zMiAxMkMxOCAxMiA2LjQgMjQgMiAzMmM0LjQgOCAxNiAyMCAzMCAyMHMyNS42LTEyIDMwLTIwYy00LjQtOC0xNi0yMC0zMC0yMHptMCAzNmMtOC44IDAtMTYtNy4yLTE2LTE2czcuMi0xNiAxNi0xNiAxNiA3LjIgMTYgMTYtNy4yIDE2LTE2IDE2eiIvPgogIAogIDwhLS0gSXJpZGUgLS0+CiAgPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iOCIgZmlsbD0iIzIxOTZmMyIvPgoKICA8IS0tIFB1cGlsbGEgLS0+CiAgPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iNCIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K" alt="Mostra/Nascondi" />
+                    </button>
                 </div>
 
                 <div class="${properties.kcFormGroupClass!} ${properties.kcFormSettingClass!}">
@@ -139,5 +142,13 @@
             </div>
         </#if>
     </#if>
-
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("password");
+            const eyeIcon = document.getElementById("eyeIcon");
+            const isPassword = passwordInput.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+            eyeIcon.style.filter = isPassword ? "grayscale(0%)" : "grayscale(80%)";
+        }
+    </script>
 </@layout.registrationLayout>

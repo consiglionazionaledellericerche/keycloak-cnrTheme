@@ -804,3 +804,30 @@ ul#kc-totp-supported-apps {
 h1#kc-page-title {
     margin-top: 0px;
 }
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px; /* Spazio per l'icona */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0px;
+    top: 70%;
+    transform: translateY(-50%);
+    height: 60%;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+}
+
+.toggle-password img {
+    height: 100%;
+    width: auto;
+}
